@@ -6,9 +6,9 @@ on:
   push:
     branches:
       - main
-  workflow_dispatch:
 
 jobs:
+
   check-version-txt:
     runs-on: ubuntu-latest
     steps:
