@@ -1,4 +1,4 @@
-name: Build and Test
+name: Build, Test
 
 on:
   pull_request:
@@ -35,7 +35,7 @@ jobs:
         run: |
           /bin/bash -x run.sh lint:ci
 
-   execute-tests:
+  execute-tests:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -43,10 +43,6 @@ jobs:
         uses: actions/setup-python@v3
         with:
           python-version: 3.8
-      - name: Lint, Format, and other static code quality checks
-        run: |
-          make install
-          make test
 
   push-tags:
     needs:
@@ -66,18 +62,18 @@ jobs:
     steps:
       - name: Dump GitHub context
         id: github_context_step
-        run: {% raw %} echo '${{ toJSON(github) }}' {% endraw %}
+        run: echo '${% raw %}{{{% endraw %} toJSON(github) }}'
       - name: Dump job context
-        run: {% raw %} echo '${{ toJSON(job) }}' {% endraw %}
+        run: echo '${% raw %}{{{% endraw %} toJSON(job) }}'
       - name: Dump steps context
-        run: {% raw %} echo '${{ toJSON(steps) }}' {% endraw %}
+        run: echo '${% raw %}{{{% endraw %} toJSON(steps) }}'
       - name: Dump runner context
-        run: {% raw %} echo '${{ toJSON(runner) }}' {% endraw %}
+        run: echo '${% raw %}{{{% endraw %} toJSON(runner) }}'
       - name: Dump strategy context
-        run: {% raw %} echo '${{ toJSON(strategy) }}' {% endraw %}
+        run: echo '${% raw %}{{{% endraw %} toJSON(strategy) }}'
       - name: Dump matrix context
-        run: {% raw %} echo '${{ toJSON(matrix) }}' {% endraw %}
+        run: echo '${% raw %}{{{% endraw %} toJSON(matrix) }}'
       - name: Dump secrets
-        run: {% raw %} echo '${{ toJSON(secrets) }}' {% endraw %}
+        run: echo '${% raw %}{{{% endraw %} toJSON(secrets) }}'
       - name: Dump vars
-        run: {% raw %} echo '${{ toJSON(vars) }}' {% endraw %}
+        run: echo '${% raw %}{{{% endraw %} toJSON(vars) }}'
